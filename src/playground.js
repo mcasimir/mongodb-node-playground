@@ -3,20 +3,38 @@ import repl from 'repl';
 import vm from 'vm';
 import path from 'path';
 import os from 'os';
+import cliColor from 'cli-color';
 
 import { Context } from './context';
 import { customEvalWithContext } from './custom-eval-with-context';
 import { parseArgs } from './parse-args';
+
+function welcome(connectionString) {
+  const connectionStringUrl = new URL(connectionString);
+
+  if (connectionStringUrl.password) {
+    connectionStringUrl.password = 'xxxxx';
+  }
+
+  require('mongodb/package.json').version;
+  console.info('Driver version:\t', require('mongodb/package.json').version);
+  console.info('Connecting to:\t', cliColor.green(connectionStringUrl.toString()));
+}
 
 async function main() {
   const {
     connectionString
   } = parseArgs(process.argv.slice(2));
 
+  welcome(connectionString);
+
   const client = await MongoClient.connect(
     connectionString,
     { useUnifiedTopology: true }
   );
+
+
+  console.info('\nconnected.\n');
 
   const context = new Context(client);
   vm.createContext(context);

@@ -7,8 +7,9 @@
     "mongodb-node-playground": "./bin/mongodb-node-playground.js"
   },
   "dependencies": {
+    "cli-color": "^2.0.0",
     "esm": "^3.2.25",
-    "mongodb": "3.5.3"
+    "mongodb": "3.6.2"
   },
   "scripts": {
     "start": "node --experimental-repl-await src/index.js"
