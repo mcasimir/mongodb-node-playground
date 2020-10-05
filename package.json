@@ -1,0 +1,16 @@
+{
+  "name": "mongodb-node-playground",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "esm": "^3.2.25",
+    "mongodb": "3.5.3"
+  },
+  "scripts": {
+    "start": "node --experimental-repl-await src/index.js"
+  },
+  "devDependencies": {
+    "mocha": "^7.1.0"
+  }
+}
