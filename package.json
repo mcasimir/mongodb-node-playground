@@ -9,7 +9,8 @@
   "dependencies": {
     "cli-color": "^2.0.0",
     "esm": "^3.2.25",
-    "mongodb": "3.6.2"
+    "mongodb": "3.6.2",
+    "yargs-parser": "^20.2.1"
   },
   "scripts": {
     "start": "node --experimental-repl-await src/index.js"
