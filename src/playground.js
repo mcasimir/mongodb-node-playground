@@ -33,7 +33,6 @@ async function main() {
     { useUnifiedTopology: true }
   );
 
-
   console.info('\nconnected.\n');
 
   const context = new Context(client);

@@ -16,7 +16,17 @@ export function parseArgs(argv) {
 
   const queryStringOptions = Object.entries(args)
     .filter(([name]) => name != '_')
+    .filter(([name]) => name != 'username')
+    .filter(([name]) => name != 'password')
     .map(([name, value]) => [name, value.toString()]);
+
+  if (args.username) {
+    connectionStringUrl.username = args.username
+  }
+
+  if (args.password) {
+    connectionStringUrl.password = args.password
+  }
 
   for (const [name, value] of queryStringOptions) {
     connectionStringUrl.searchParams.append(name, value);
