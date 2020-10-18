@@ -6,4 +6,8 @@ export class Context {
   db = (name) => {
     return this.client.db(name);
   }
+
+  require = require;
+  console = console;
+  process = process;
 }

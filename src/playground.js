@@ -18,6 +18,7 @@ function welcome(connectionString) {
 
   require('mongodb/package.json').version;
   console.info('Driver version:\t', require('mongodb/package.json').version);
+  console.info('Kerberos version:\t', require('kerberos/package.json').version);
   console.info('Connecting to:\t', cliColor.green(connectionStringUrl.toString()));
 }
 
@@ -30,7 +31,10 @@ async function main() {
 
   const client = await MongoClient.connect(
     connectionString,
-    { useUnifiedTopology: true }
+    {
+      useUnifiedTopology: true,
+      useNewUrlParser: true
+    }
   );
 
   console.info('\nconnected.\n');
