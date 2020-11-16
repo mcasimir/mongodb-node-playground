@@ -20,12 +20,16 @@ export function parseArgs(argv) {
     .filter(([name]) => name != 'password')
     .map(([name, value]) => [name, value.toString()]);
 
+  let auth;
+
   if (args.username) {
-    connectionStringUrl.username = args.username
+    auth = auth || {};
+    auth.user = args.username;
   }
 
   if (args.password) {
-    connectionStringUrl.password = args.password
+    auth = auth || {};
+    auth.password = args.password
   }
 
   for (const [name, value] of queryStringOptions) {
@@ -36,4 +40,3 @@ export function parseArgs(argv) {
     connectionString: connectionStringUrl.toString()
   };
 }
-

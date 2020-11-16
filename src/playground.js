@@ -24,20 +24,33 @@ function welcome(connectionString) {
 
 async function main() {
   const {
-    connectionString
+    connectionString,
+    auth
   } = parseArgs(process.argv.slice(2));
 
   welcome(connectionString);
 
+  const driverOptions = {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+  };
+
+  if (auth) {
+    driverOptions.auth = auth;
+  }
+
   const client = await MongoClient.connect(
     connectionString,
-    {
-      useUnifiedTopology: true,
-      useNewUrlParser: true
-    }
+    driverOptions
   );
 
-  console.info('\nconnected.\n');
+  const connectionStatus = await client.db().command({connectionStatus : 1});
+
+  const authenticatedUser =
+    ((connectionStatus.authInfo || {}).authenticatedUsers || [])[0]
+
+  const authInfo = authenticatedUser ? `as ${authenticatedUser.user}` : `unauthenticated`;
+  console.info(`\nconnected ${authInfo}.\n`);
 
   const context = new Context(client);
   vm.createContext(context);
